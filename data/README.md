@@ -27,7 +27,6 @@ The first step of the pipeline, responsible for the heart localization, produces
 * `model_output`
 * `model_output_nrrd`
 * `resampled`
-* 
 
 #### Heart Segmentation (Step 2)
 
@@ -71,9 +70,9 @@ For instance, after running the DeepCAC pipeline using the provided sample subje
 | PatientID | Dice | CAC_calc | CAC_pred | Class_calc | Class_pred |
 |-----------|------|----------|----------|------------|------------|
 |    0187   |  0   |     0    |     0    |      0     |      0     |
-|    0909   |0.945 | 1260.875 | 1216.215 |      3     |      3     |
-|    0987   |0.975 |  127.82  |  128.59  |      2     |      2     |
-|    0506   | 0.95 | 318.395  |  301.84  |      3     |      3     |
+|    0909   |0.776 | 1260.875 | 811.965  |      3     |      3     |
+|    0987   |0.933 |  127.82  |  138.985 |      2     |      2     |
+|    0506   | 0.77 | 318.395  |  184.8   |      3     |      2     |
 
 
 ## Input Data Format

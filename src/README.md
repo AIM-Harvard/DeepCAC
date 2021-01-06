@@ -23,7 +23,7 @@ python run_step1_heart_localization.py
 python run_step1_heart_localization.py --conf ${NAME_OF_CONF_FILE}.yaml
 ```
 
-By default, `config/heart_localization.yaml` is loaded. All the tweakable parameters (e.g., path to the base data folder, output folders naming, wheter or not to export png images for quality control purposes) for this first step can be found (and modified!) in such file.
+By default, `config/step1_heart_localization.yaml` is loaded. All the tweakable parameters (e.g., path to the base data folder, output folders naming, wheter or not to export png images for quality control purposes) for this first step can be found (and modified!) in such file.
 
 ### Brief Description
 
@@ -53,7 +53,7 @@ python run_step2_heart_segmentation.py
 python run_step2_heart_segmentation.py --conf ${NAME_OF_CONF_FILE}.yaml
 ```
 
-By default, `config/heart_segmentation.yaml` is loaded. All the tweakable parameters (e.g., path to the heart localisation data folder, output folders naming, wheter or not to export png images for quality control purposes) for this second step can be found (and modified!) in such file.
+By default, `config/step2_heart_segmentation.yaml` is loaded. All the tweakable parameters (e.g., path to the heart localisation data folder, output folders naming, wheter or not to export png images for quality control purposes) for this second step can be found (and modified!) in such file.
 
 ### Brief Description
 
@@ -76,7 +76,7 @@ python run_step3_cac_segmentation.py
 python run_step3_cac_segmentation.py --conf ${NAME_OF_CONF_FILE}.yaml
 ```
 
-By default, `config/cac_segmentation.yaml` is loaded. All the tweakable parameters (e.g., path to the inferred heart segmentation data folder, output folders naming, wheter or not to export png images for quality control purposes) for this third step can be found (and modified!) in such file.
+By default, `config/step3_cac_segmentation.yaml` is loaded. All the tweakable parameters (e.g., path to the inferred heart segmentation data folder, output folders naming, wheter or not to export png images for quality control purposes) for this third step can be found (and modified!) in such file.
 
 ### Brief Description
 
@@ -94,7 +94,7 @@ python run_step4_cac_scoring.py
 python run_step4_cac_scoring.py --conf ${NAME_OF_CONF_FILE}.yaml
 ```
 
-By default, `config/cac_scoring.yaml ` is loaded. All the tweakable parameters (e.g., path to the data folder, where to save the CAC scoring data) for this fourth and last step can be found (and modified!) in such file.
+By default, `config/step4_cac_scoring.yaml ` is loaded. All the tweakable parameters (e.g., path to the data folder, where to save the CAC scoring data) for this fourth and last step can be found (and modified!) in such file.
 
 ### Brief Description
 
