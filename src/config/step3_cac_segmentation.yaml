@@ -1,0 +1,71 @@
+# config file for the third step of the pipeline - CAC segmentation
+
+io:
+  # parent data directory
+  path_to_data_folder: "../data" # this directory should exist already
+  
+  # parent data directory subdir where raw data should be found
+  raw_data_folder_name: "raw" # this directory should exist already (provided)
+  
+  # parent data directory subdir where data resulting from the heart localisation step should be saved
+  heartloc_data_folder_name: "step1_heartloc" # this directory should exist already (step 1)
+  
+  # parent data directory subdir where data resulting from the heart segmentation step should be saved
+  heartseg_data_folder_name: "step2_heartseg" # this directory should exist already (step 2)
+  
+  # parent data directory subdir where the outputs of the third step of the pipeline should be saved
+  cacs_data_folder_name: "step3_cacseg"
+
+  # follows a number of subdir.s under "heartseg_data_folder_name" where
+  # the different results of the second step of the pipeline should be saved
+  
+  # subdir under which preprocessed volumes from the first step should be saved as NRRD files
+  curated_data_folder_name: "curated" # this directory should exist already (step 1)
+  
+  # subdir under which an upsampled version of the first step segmentation should be saved (NRRD)
+  step2_inferred_data_folder_name: "model_output_nrrd" # this directory should exist already (step 2)
+  
+  # subdir under which the bounding box information for the volumes to segment should be saved
+  dilated_data_folder_name: "dilated"
+  
+  # subdir under which cropped data should be saved
+  cropped_data_folder_name: "cropped"
+  
+  # subdir under which a slice for each of the cropped volumes
+  # should be saved as png file (for quality control purposes)
+  qc_cropped_data_folder_name: "cropped_qc"
+    
+  # subdir under which the heart localisation network weights should be found
+  model_weights_folder_name: "model_weights" # this directory should exist already (provided)
+  
+  # subdir under which the resulting segmentation should be saved
+  model_output_folder_name: "model_output"
+  
+## ----------------------------------------
+
+processing:
+  # whether or not the segmentation masks are available
+  has_manual_seg: true
+    
+  # whether or not png images for quality control should be exported
+  export_png: true
+  
+  # whether or not a png image *FOR EACH SLICE* containing CAC should be exported for quality control
+  export_cac_slices_png: false
+  
+  # number of CPU cores to be used
+  num_cores: 1
+  
+  # whether or not to use the masks inferred from the pipeline (step 2) for the CAC segmentation
+  # if set to "false", uses the training masks (if provided)
+  use_inferred_masks: true
+  
+  # size of the cropped patches, in voxels, to be used for CAC segmentation
+  patch_size: [32, 48, 48]
+  
+## ----------------------------------------
+
+# config parameters for the model architecture
+model:
+  # name of the file where the weights are stored (under "model_weights_folder_name")
+  weights_file_name: "step3_cacseg_model_weights.hdf5"

@@ -1,0 +1,119 @@
+# config file for the first step of the pipeline - heart localization
+
+io:
+  # parent data directory
+  path_to_data_folder: "../data"
+  
+  # parent data directory subdir where raw data should be found
+  raw_data_folder_name: "raw"
+  
+  # parent data directory subdir where the outputs of the first step of the pipeline should be saved
+  heartloc_data_folder_name: "step1_heartloc"
+  
+  # follows a number of subdir.s under "heartloc_data_folder_name" where
+  # the different results of the first step of the pipeline should be saved
+  
+  # subdir under which preprocessed volumes should be saved as NRRD files
+  curated_data_folder_name: "curated"
+  
+  # subdir under which a slice for each of the preprocessed volumes
+  # should be saved as png file (for quality control purposes)
+  qc_curated_data_folder_name: "curated_qc"
+  
+  # subdir under which resampled data should be saved
+  resampled_data_folder_name: "resampled"
+  
+  # subdir under which preprocessed volumes should be saved as h5 files
+  # (same data found under "curated_data_folder_name", but in a format which is better suited for processing)
+  model_input_folder_name: "model_input"
+  
+  # subdir under which the heart localisation network weights should be found
+  model_weights_folder_name: "model_weights"
+  
+  # subdir under which the resulting segmentation should be saved
+  model_output_folder_name: "model_output"
+  
+  # subdir under which an upsampled version of the resulting segmentation should be saved (NRRD)
+  upsampled_data_folder_name: "model_output_nrrd"
+  
+## ----------------------------------------
+
+processing:
+  # whether or not the segmentation masks are available
+  has_manual_seg: true
+  
+  # whether or not holes in segmentation masks should be filled
+  fill_mask_holes: true
+  
+  # whether or not png images for quality control should be exported
+  export_png: true
+  
+  # number of cores to be used for the pre-processing
+  num_cores: 1
+  
+  # wheter the input data should be split or not (see input_data_prep.get_files() for more details)
+  create_test_set: "All"
+  
+  # size of the images, in voxels, after the first curation step - z is kept dynamic
+  curated_size: [512, 512, 0]
+  
+  # spacing of the images, in mm, after the first curation step
+  curated_spacing: [0.68, 0.68, 2.5]
+
+  # xyz size, in voxels, of the downsampled volumes that will be used as input to the model
+  model_input_size: 112
+  
+  # xyz spacing, in mm, of the downsampled volumes that will be used as input to the model
+  model_input_spacing: 3.0
+
+## ----------------------------------------
+
+# config parameters for the model architecture
+model:
+  # to avoid problems, consider reading this as tuple when training
+  pool_size: [2, 2, 2]
+  
+  # to avoid problems, consider reading this as tuple when training
+  conv_size: [3, 3, 3]
+  
+  # downsampling steps in the U-Net model
+  down_steps: 4
+
+  # 
+  extended: False
+
+  # name of the file where the weights are stored (under "model_weights_folder_name")
+  weights_file_name: "step1_heartloc_model_weights.hdf5"
+
+  # hyperparameters used during the training of the heart localization model
+  training:
+    
+    dropout: 0.5
+    
+    batch_size: 3
+    
+    num_epochs: 1200
+    
+    lr: 0.00001
+    
+    # drop learning rate by (ratio)
+    lr_drop: 0.7
+    
+    # drop every
+    drop_epochs: 200
+    
+    augmentation:
+      # [zMin, zMax, yMin, yMax, xMin, xMax]
+      augm_translation: [0, 0, -9, 10, -9, 10]
+      
+      augm_rotation: [-3, 4, 1]
+      
+      # to avoid problems, consider reading this as a list of tuple when training
+      augm_axes: [[0, 2], [1, 2], [0, 1]]
+      
+      # whether multiprocessing should be used or not to generate augmented batches 
+      use_multiprocessing: true
+      
+      # if multiprocessing is used to generate augmented batches, do so with the following param.s
+      max_queue_size: 8
+      workers: 8

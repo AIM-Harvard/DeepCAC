@@ -1,0 +1,38 @@
+# config file for the fourth and last step of the pipeline - CAC scoring
+
+io:
+  # parent data directory
+  path_to_data_folder: "../data" # this directory should exist already
+    
+  # parent data directory subdir where data resulting from the heart localisation step should be saved
+  heartloc_data_folder_name: "step1_heartloc" # this directory should exist already (step 1)
+  
+  # parent data directory subdir where data resulting from the heart segmentation step should be saved
+  heartseg_data_folder_name: "step2_heartseg" # this directory should exist already (step 2)
+  
+  # parent data directory subdir where data resulting from the CAC segmentation step should be saved
+  cacseg_data_folder_name: "step3_cacseg" # this directory should exist already (step 3)
+
+  # follows a number of subdir.s under "heartseg_data_folder_name" where
+  # the different results of the second step of the pipeline should be saved
+  
+  # subdir under which preprocessed volumes from the first step should be saved as NRRD files
+  curated_data_folder_name: "curated" # this directory should exist already (step 1)
+  
+  # subdir under which an upsampled version of the first step segmentation should be saved (NRRD)
+  step3_inferred_data_folder_name: "model_output" # this directory should exist already (step 3)
+  
+  # subdir under which cropped data should be saved
+  cropped_data_folder_name: "cropped" # this directory should exist already (step 3)
+    
+  # subdir under which the resulting segmentation metrics should be saved (CSV)
+  cac_score_folder_name: "step4_cac_score"
+  
+## ----------------------------------------
+
+processing:
+  # whether or not the segmentation masks are available
+  has_manual_seg: true
+      
+  # number of CPU cores to be used
+  num_cores: 1

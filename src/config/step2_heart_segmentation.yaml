@@ -1,0 +1,135 @@
+# config file for the second step of the pipeline - heart segmentation
+
+io:
+  # parent data directory
+  path_to_data_folder: "../data"
+  
+  # parent data directory subdir where raw data should be found
+  raw_data_folder_name: "raw"
+  
+  # parent data directory subdir where data resulting from the heart localisation step should be saved
+  heartloc_data_folder_name: "step1_heartloc"
+  
+  # parent data directory subdir where the outputs of the second step of the pipeline should be saved
+  heartseg_data_folder_name: "step2_heartseg"
+
+  # follows a number of subdir.s under "heartseg_data_folder_name" where
+  # the different results of the second step of the pipeline should be saved
+  
+  # subdir under which preprocessed volumes from the first step should be saved as NRRD files
+  curated_data_folder_name: "curated"
+  
+  # subdir under which an upsampled version of the first step segmentation should be saved (NRRD)
+  step1_inferred_data_folder_name: "model_output_nrrd"
+  
+  # subdir under which the bounding box information for the volumes to segment should be saved
+  bbox_folder_name: "bbox"
+  
+  # subdir under which cropped data should be saved
+  cropped_data_folder_name: "cropped"
+  
+  # subdir under which preprocessed volumes should be saved as h5 files
+  # (same data found under "cropped_data_folder_name", but in a format which is better suited for processing)
+  model_input_folder_name: "model_input"
+  
+  # subdir under which the heart localisation network weights should be found
+  model_weights_folder_name: "model_weights"
+  
+  # subdir under which the resulting segmentation should be saved
+  model_output_folder_name: "model_output"
+  
+  # subdir under which an upsampled version of the resulting segmentation should be saved (NRRD)
+  upsampled_data_folder_name: "model_output_nrrd"
+  
+  # subdir under which the resulting segmentation metrics should be saved (CSV)
+  seg_metrics_folder_name: "model_output_metrics"
+  
+## ----------------------------------------
+
+processing:
+  # whether or not the segmentation masks are available
+  has_manual_seg: true
+  
+  # whether or not holes in segmentation masks should be filled
+  fill_mask_holes: true
+  
+  # whether or not png images for quality control should be exported
+  export_png: true
+  
+  # number of CPU cores to be used
+  num_cores: 1
+  
+  # whether or not to use the masks inferred from the pipeline (step 1) for the heart segmentation
+  # if set to "false", uses the training masks (if provided)
+  use_inferred_masks: true
+  
+  # size of the images, in voxels, after the first curation step - z is kept dynamic
+  curated_size: [512, 512, 0]
+  
+  # spacing of the images, in mm, after the first curation step
+  curated_spacing: [0.68, 0.68, 2.5]
+  
+  # FIXME
+  inter_size: [384, 384, 80]
+    
+  # FIXME
+  training_size: [128, 128, 112]
+  
+  # FIXME
+  final_size: [128, 128, 80]
+  
+  # FIXME
+  final_spacing: [0, 0, 2.5]
+  
+
+## ----------------------------------------
+
+# config parameters for the model architecture
+model:
+  # to avoid problems, consider reading this as tuple when training
+  pool_size: [2, 2, 2]
+  
+  # to avoid problems, consider reading this as tuple when training
+  conv_size: [3, 3, 3]
+  
+  # downsampling steps in the U-Net model
+  down_steps: 4
+  
+  # 
+  extended: False
+
+  # name of the file where the weights are stored (under "model_weights_folder_name")
+  weights_file_name: "step2_heartseg_model_weights.hdf5"
+
+  # hyperparameters used during the training of the heart segmentation model
+  training:
+    
+    dropout: 0.5
+    
+    batch_size: 4
+    
+    num_epochs: 1200
+    
+    lr: 0.00001
+    
+    # drop learning rate by (ratio)
+    lr_drop: 0.7
+    
+    # drop every
+    drop_epochs: 200
+    
+    augmentation:
+      # [zMin, zMax, yMin, yMax, xMin, xMax]
+      augm_translation: [0, 0, -9, 10, -9, 10]
+      
+      augm_rotation: [-3, 4, 1]
+      
+      # read as list of tuples
+      augm_axes: [[0, 2], [1, 2], [0, 1]]
+      
+      # whether multiprocessing should be used or not to generate augmented batches 
+      use_multiprocessing: true
+      
+      # if multiprocessing is used to generate augmented batches, do so with the following param.s
+      max_queue_size: 8
+      workers: 8
