@@ -1,6 +1,9 @@
 # DeepCAC
 
-Fully automatic coronary calcium risk assessment using Deep Learning.
+Fully automated deep Learning system for cardiovascular risk prediction.  
+
+If you publish any work which uses this package, please cite the following publication: 
+Zeleznik, R et al. Deep convolutional neural networks to predict cardiovascular risk from computed tomography. Nature Comm 12, 715 (2021). https://www.nature.com/articles/s41467-021-20966-2
 
 ## Repository Structure
 
