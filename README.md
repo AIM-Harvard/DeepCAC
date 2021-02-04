@@ -20,7 +20,7 @@ Additional details on the content of the subdirectories and their structure can 
 
 ## Set-up
 
-This code was developed and tested using Python 2.7.17.
+This code was developed and tested using Python 2.7.17 on Ubuntu 18.04 with Cuda 10.1 and libcudnn 7.6.
 
 For the code to run as intended, all the packages under `requirements.txt` should be installed. In order not to break previous installations and ensure full compatibility, it's highly recommended to create a virtual environment to run the DeepCAC pipeline in. Here follows an example of set-up using `python virtualenv`:
 
