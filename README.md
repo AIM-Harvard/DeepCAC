@@ -1,5 +1,6 @@
 # DeepCAC
 
+<<<<<<< HEAD
 Fully automatic coronary calcium risk assessment using Deep Learning. This 
 work was published in 
 [nature communications](https://doi.org/10.1038/s41467-021-20966-2) 
@@ -14,6 +15,15 @@ Nat Commun 12, 715 (2021). https://doi.org/10.1038/s41467-021-20966-2*
 [<img src="https://media.springernature.com/full/nature-cms/uploads/product/ncomms/header-03d2e325c0a02f6df509e5730e9be304.svg">](https://doi.org/10.1038/s41467-021-20966-2)
 
 
+=======
+Fully automatic coronary calcium risk assessment using Deep Learning. This work was published in [nature communications](https://doi.org/10.1038/s41467-021-20966-2) - Open access!
+
+If you use code or parts of this code in your work, please cite our publication:  
+*Zeleznik, R., Foldyna, B., Eslami, P. et al. Deep convolutional neural networks to predict cardiovascular risk from computed tomography. Nat Commun 12, 715 (2021). https://doi.org/10.1038/s41467-021-20966-2*
+
+[<img src="https://media.springernature.com/full/nature-cms/uploads/product/ncomms/header-03d2e325c0a02f6df509e5730e9be304.svg">](https://doi.org/10.1038/s41467-021-20966-2)
+
+>>>>>>> feb3f87b84e33a7a54beb60d448451bfaf6732f1
 
 ## Repository Structure
 
@@ -27,7 +37,7 @@ Additional details on the content of the subdirectories and their structure can 
 
 ## Setup
 
-This code was developed and tested using Python 2.7.17.
+This code was developed and tested using Python 2.7.17 on Ubuntu 18.04 with Cuda 10.1 and libcudnn 7.6.
 
 For the code to run as intended, all the packages under `requirements.txt` should be installed. In order not to break previous installations and ensure full compatibility, it's highly recommended to create a virtual environment to run the DeepCAC pipeline in. Here follows an example of set-up using `python virtualenv`:
 
