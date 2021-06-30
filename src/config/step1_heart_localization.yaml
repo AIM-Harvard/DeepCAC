@@ -2,7 +2,7 @@
 
 io:
   # parent data directory
-  path_to_data_folder: "../data"
+  path_to_data_folder: "/mnt/data7/DH_Marton"
   
   # parent data directory subdir where raw data should be found
   raw_data_folder_name: "raw"
